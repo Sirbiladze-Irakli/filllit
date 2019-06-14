@@ -18,7 +18,7 @@
 # include <sys/uio.h>
 # include <sys/fcntl.h>
 
-# define BUFF_SIZE	5
+# define BUFF_SIZE	20000
 
 int 	get_next_line(const int fd, char **line);
 

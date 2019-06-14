@@ -6,7 +6,7 @@
 #    By: jormond- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/15 15:47:49 by jormond-          #+#    #+#              #
-#    Updated: 2019/06/14 15:52:11 by jormond-         ###   ########.fr        #
+#    Updated: 2019/06/14 20:59:31 by jormond-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC	= ft_bzero.c \
 		ft_isascii.c \
 		ft_isdigit.c \
 		ft_isprint.c \
+		ft_join_free.c \
 		ft_memalloc.c \
 		ft_memchr.c \
 		ft_memset.c \

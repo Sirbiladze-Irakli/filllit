@@ -12,12 +12,12 @@
 
 #include "libft.h"
 
-void	ft_join_free(char **content, char *buf)
+void		ft_join_free(char **content, char *buf)
 {
 	char	*tmp;
 
-	if (!(tmp = ft_strjoin(*content, buf)))
-		return ;
+	tmp = *content;
+	tmp = ft_strjoin(*content, buf);
 	free(*content);
 	*content = tmp;
 }
