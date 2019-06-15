@@ -6,7 +6,7 @@
 /*   By: jormond- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 14:43:31 by jormond-          #+#    #+#             */
-/*   Updated: 2019/06/14 20:59:12 by jormond-         ###   ########.fr       */
+/*   Updated: 2019/06/15 17:08:17 by jormond-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strtrim(char const *s);
 int					ft_toupper(int c);
 int					ft_tolower(int c);
-
-
 
 void				ft_lstadd(t_list **start, t_list *link);
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
