@@ -18,14 +18,22 @@ static int  ft_is_valid(char *buf, int len)
     int     i;
 
     i = 0;
-    while (i > len)
+    while (buf[i])
     {
-        if (buf[i] != '.' || buf[i] != '#' || buf[i] != '\n')
-            return ;
-        else if (((i % 21 + 1) % 5) || (i % 21 % 5))
-            printf("4et ne tak");
+        if (buf[i] != '.' && buf[i] != '#' && buf[i] != '\n')
+        {
+            printf ("Poh!");
+            return (0);
+        }
+        else if (!(i % 21 + 1) % 5)
+        {
+            printf ("Doh!");
+            return (0);
+        }
+        printf("%c\n", buf[i]);
         i++;
     }
+    return (1);
 }
 
 int         main(int ac, char **av)
@@ -39,7 +47,9 @@ int         main(int ac, char **av)
     fd = open(av[1], O_RDONLY);
     if (!(len = read(fd, buf, MAX_VALID_BUF)))
         return (0);
-    printf("%d", len);
-    if (ERROR == ft_is_valid(buf, len)
+    printf("%s\n", buf);
+    if (ERROR == ft_is_valid(buf, len))
+    {
         return (0);
+    }
 }

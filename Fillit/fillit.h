@@ -14,5 +14,4 @@
 #include "libft/libft.h"
 
 #define MAX_VALID_BUF 545
-
-void    ft_is_valid(char *buf, int len);
+#define ERROR 0
