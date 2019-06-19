@@ -13,6 +13,26 @@
 #include <stdio.h>
 #include "fillit.h"
 
+static int  ft_is_valid2(char *buf)
+{
+    int i;
+
+    i = 0;
+    while (buf[i])
+    {
+        if (buf[i] != '.' || buf[i] != '#' || buf[i] != '\n')
+            return (-1);
+        if (buf[i] == '#')
+        {
+            if (buf[i] != buf[i - 1] || buf[i] != buf[i + 1] ||
+                buf[i] != buf[i - 5] || buf[i] != buf[i + 5])
+                return (-1);
+        }
+        i++;
+    }
+    return (0);
+}
+
 static int  ft_is_valid(char *buf)
 {
     int     i;
@@ -22,8 +42,6 @@ static int  ft_is_valid(char *buf)
     sh = nl = i = 0;
     while (buf[i])
     {
-        if (buf[i] != '.' && buf[i] != '#' && buf[i] != '\n' && buf[i] != '\0')
-            return (-1);
         if (buf[i] == '#')
             sh++;
         if (sh > 4 && nl <= 4)
@@ -39,7 +57,7 @@ static int  ft_is_valid(char *buf)
         }
         i++;
     }
-    return (0);
+    return (ft_is_valid2(buf));
 }
 
 static char *ft_werewolf_letters(char *str)
