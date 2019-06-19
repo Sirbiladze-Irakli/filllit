@@ -10,8 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include "libft/libft.h"
+#ifndef FILLIT_H
+# define FILLIT_H
+# include <fcntl.h>
+# include "libft/libft.h"
 
-#define MAX_VALID_BUF 545
-#define ERROR -1
+# define MAX_VALID_BUF 545
+# define ERROR -1
+
+typedef struct  s_square
+{
+    int         size;
+    char        **map;
+}               t_square;
+
+#endif

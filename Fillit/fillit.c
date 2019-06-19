@@ -60,6 +60,13 @@ static int  ft_is_valid(char *buf)
     return (ft_is_valid2(buf));
 }
 
+static char *ft_shift(char *str)
+{
+    int i;
+
+    i = 0;
+}
+
 static char *ft_werewolf_letters(char *str)
 {
     int i;
@@ -92,6 +99,7 @@ static void ft_magic_sol(char *buf)
 
     str = buf;
     str = ft_werewolf_letters(str);
+    str = ft_shift(str);
 }
 
 int         main(int ac, char **av)
