@@ -13,27 +13,67 @@
 #include <stdio.h>
 #include "fillit.h"
 
-static int  ft_is_valid(char *buf, int len)
+static int  ft_is_valid(char *buf)
 {
     int     i;
+    int     nl;
+    int     sh;
 
-    i = 0;
+    sh = nl = i = 0;
     while (buf[i])
     {
-        if (buf[i] != '.' && buf[i] != '#' && buf[i] != '\n')
+        if (buf[i] != '.' && buf[i] != '#' && buf[i] != '\n' && buf[i] != '\0')
+            return (-1);
+        if (buf[i] == '#')
+            sh++;
+        if (sh > 4 && nl <= 4)
+            return (-1);
+        if (buf[i] == '\n')
+            nl++;
+        if (nl == 4)
         {
-            printf ("Poh!");
-            return (0);
+            if ((i % 21 + 1) % 5 != 0)
+                return (-1);
+            nl = -1;
+            sh = 0;
         }
-        else if (!(i % 21 + 1) % 5)
-        {
-            printf ("Doh!");
-            return (0);
-        }
-        printf("%c\n", buf[i]);
         i++;
     }
-    return (1);
+    return (0);
+}
+
+static char *ft_werewolf_letters(char *str)
+{
+    int i;
+    int c;
+    int nl;
+
+    i = 0;
+    c = 65;
+    nl = 0;
+    while (str[i])
+    {
+        if (str[i] == '#')
+            str[i] = c;
+        if (str[i] == '\n')
+            nl++;
+        if (nl == 4)
+        {
+            c++;
+            nl = -1;
+        }
+        i++;
+    }
+    printf("%s", str);
+    return (str);
+}
+
+static void ft_magic_sol(char *buf)
+{
+    char *str;
+
+    str = buf;
+    str = ft_werewolf_letters(str);
 }
 
 int         main(int ac, char **av)
@@ -43,13 +83,22 @@ int         main(int ac, char **av)
     char    buf[MAX_VALID_BUF + 1];
 
     if (ac != 2)
-        return (0);
-    fd = open(av[1], O_RDONLY);
-    if (!(len = read(fd, buf, MAX_VALID_BUF)))
-        return (0);
-    printf("%s\n", buf);
-    if (ERROR == ft_is_valid(buf, len))
     {
+        write(1, "error\n", 6);
         return (0);
     }
+    fd = open(av[1], O_RDONLY);
+    if (!(len = read(fd, buf, MAX_VALID_BUF)))
+    {
+        write(1, "error\n", 6);
+        return (0);
+    }
+    buf[len] = '\0';
+    if (ERROR == ft_is_valid(buf))
+    {
+        write(1, "error\n", 6);
+        return (0);
+    }
+    ft_magic_sol(buf);
+    return (0);
 }
