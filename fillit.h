@@ -17,6 +17,7 @@
 
 # define MAX_VALID_BUF 545
 # define ERROR -1
+# define OK 0
 
 typedef struct  s_square
 {
