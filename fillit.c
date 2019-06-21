@@ -13,17 +13,15 @@
 #include <stdio.h>
 #include "fillit.h"
 
-static int  ft_is_valid2(char *buf)
+static int  ft_is_valid2(char *buf, int i)
 {
-	int i;
 	int	sh;
+	int stop;
 
-	i = 0;
 	sh = 0;
-	while (buf[i])
+	stop = i + 20;
+	while (buf[i] != buf[stop])
 	{
-		if (buf[i] != '.' && buf[i] != '#' && buf[i] != '\n')
-			return (ERROR);
         if (buf[i] == '#')
 		{
 			if (buf[i - 1] == '#')
@@ -37,7 +35,10 @@ static int  ft_is_valid2(char *buf)
 		}
 		i++;
 	}
-	return (sh == 6 || sh == 8);
+	if (buf[i] == '\0')
+		return(OK);
+	printf("%d\n", sh);
+	return ((sh % 6 == OK || sh % 8 == OK) ? ft_is_valid2(buf, i) : ERROR);
 }
 
 static int  ft_is_valid(char *buf)
@@ -51,6 +52,8 @@ static int  ft_is_valid(char *buf)
 	sh = 0;
 	while (buf[i])
 	{
+		if (buf[i] != '.' && buf[i] != '#' && buf[i] != '\n')
+			return (ERROR);
 		if (buf[i] == '#')
 			sh++;
 		if (sh > 4 && nl <= 4)
@@ -66,7 +69,7 @@ static int  ft_is_valid(char *buf)
 		}
 		i++;
 	}
-	return (ft_is_valid2(buf));
+	return (ft_is_valid2(buf, i = 0));
 }
 
 // static char *ft_shift(char *str)
@@ -129,7 +132,7 @@ int          main(int ac, char **av)
 		return (0);
 	}
 	buf[len] = '\0';
-	if (6 != ft_is_valid(buf) || 8 != ft_is_valid(buf))
+	if (ERROR == ft_is_valid(buf))
 	{
 		write(1, "error\n", 6);
 		return (0);
