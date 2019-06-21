@@ -1,26 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fillit.c                                           :+:      :+:    :+:   */
+/*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jormond- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jormond- <jormond-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:25:17 by jormond-          #+#    #+#             */
-/*   Updated: 2019/06/20 10:44:31 by jormond-         ###   ########.fr       */
+/*   Updated: 2019/06/21 18:11:12 by jormond-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "fillit.h"
 
+static char	**ft_parce(char *buf)
+{
+	int 	i;
+	int		j;
+	int		nl;
+	char	parc[25][22];
+
+	i = 0;
+	j = 0;
+	nl = 0;
+	while(parc[i][j])
+	{
+		while(nl <= 4)
+		{
+			if (parc[i][j] == '\n')
+				nl++;
+			parc[i][j] = *buf++;
+			j++;
+			printf("%c", parc[i][j]);
+		}
+		printf("\n");
+		nl = -1;
+		i++;
+	}
+	return (parc);
+}
+
 static int  ft_is_valid2(char *buf, int i)
 {
 	int	sh;
-	int stop;
 
 	sh = 0;
-	stop = i + 20;
-	while (buf[i] != buf[stop])
+	while (i > 21)
 	{
         if (buf[i] == '#')
 		{
@@ -34,11 +59,11 @@ static int  ft_is_valid2(char *buf, int i)
 				sh++;
 		}
 		i++;
+		printf("%d\n", i);
 	}
 	if (buf[i] == '\0')
 		return(OK);
-	printf("%d\n", sh);
-	return ((sh % 6 == OK || sh % 8 == OK) ? ft_is_valid2(buf, i) : ERROR);
+	return ((sh % 6 == OK || sh % 8 == OK) ? OK : ERROR);
 }
 
 static int  ft_is_valid(char *buf)
@@ -119,6 +144,7 @@ int          main(int ac, char **av)
 	int     fd;
 	int     len;
 	char    buf[MAX_VALID_BUF + 1];
+	char	**parc;
 
 	if (ac != 2)
 	{
@@ -126,17 +152,18 @@ int          main(int ac, char **av)
 		return (0);
 	}
 	fd = open(av[1], O_RDONLY);
-	if (!(len = read(fd, buf, MAX_VALID_BUF)))
+	if ((len = read(fd, buf, 546)) > MAX_VALID_BUF)
 	{
 		write(1, "error\n", 6);
 		return (0);
 	}
 	buf[len] = '\0';
-	if (ERROR == ft_is_valid(buf))
-	{
-		write(1, "error\n", 6);
-		return (0);
-	}
-	ft_magic_sol(buf);
+	parc = ft_parce(buf);
+	// if (ERROR == ft_is_valid(buf))
+	// {
+	// 	write(1, "error\n", 6);
+	// 	return (0);
+	// }
+	// ft_magic_sol(buf);
 	return (0);
 }
