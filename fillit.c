@@ -13,57 +13,44 @@
 #include <stdio.h>
 #include "fillit.h"
 
-static char	**ft_parce(char *buf)
+static int  ft_is_valid2(char *buf)
 {
-	int 	i;
-	int		j;
-	int		nl;
-	char	parc[25][22];
-
-	i = 0;
-	j = 0;
-	nl = 0;
-	while(parc[i][j])
-	{
-		while(nl <= 4)
-		{
-			if (parc[i][j] == '\n')
-				nl++;
-			parc[i][j] = *buf++;
-			j++;
-			printf("%c", parc[i][j]);
-		}
-		printf("\n");
-		nl = -1;
-		i++;
-	}
-	return (parc);
-}
-
-static int  ft_is_valid2(char *buf, int i)
-{
+	int i;
+	int count;
 	int	sh;
 
-	sh = 0;
-	while (i > 21)
+	i = 0;
+	while (buf[i])
 	{
-        if (buf[i] == '#')
+		count = 0;
+		sh = 0;
+		while (count <= 20)
 		{
-			if (buf[i - 1] == '#')
-				sh++;
-			if (buf[i + 1] == '#')
-				sh++;
-			if (buf[i - 5] == '#')
-				sh++;
-			if (buf[i + 5] == '#')
-				sh++;
+			if (buf[i] == '\0')
+				break ;
+			if (buf[i] != '.' && buf[i] != '#' && buf[i] != '\n')
+				return (ERROR);
+        	if (buf[i] == '#')
+			{
+				if (buf[i - 1] == '#')
+					sh++;
+				if (buf[i + 1] == '#')
+					sh++;
+				if (buf[i - 5] == '#' && (count - 5) > 0)
+					sh++;
+				if (buf[i + 5] == '#' && (count + 5) < 21)
+					sh++;
+			}
+			// printf("%d", sh);
+			// printf("%c", buf[i]);
+			count++;
+			i++;
 		}
-		i++;
-		printf("%d\n", i);
+		// printf("iter\n");
+		if (sh != 6 && sh != 8)
+			return (ERROR);
 	}
-	if (buf[i] == '\0')
-		return(OK);
-	return ((sh % 6 == OK || sh % 8 == OK) ? OK : ERROR);
+	return (OK);
 }
 
 static int  ft_is_valid(char *buf)
@@ -77,8 +64,6 @@ static int  ft_is_valid(char *buf)
 	sh = 0;
 	while (buf[i])
 	{
-		if (buf[i] != '.' && buf[i] != '#' && buf[i] != '\n')
-			return (ERROR);
 		if (buf[i] == '#')
 			sh++;
 		if (sh > 4 && nl <= 4)
@@ -94,7 +79,7 @@ static int  ft_is_valid(char *buf)
 		}
 		i++;
 	}
-	return (ft_is_valid2(buf, i = 0));
+	return (ft_is_valid2(buf));
 }
 
 // static char *ft_shift(char *str)
