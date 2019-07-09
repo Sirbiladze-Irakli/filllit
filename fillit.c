@@ -6,7 +6,7 @@
 /*   By: jormond- <jormond-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:25:17 by jormond-          #+#    #+#             */
-/*   Updated: 2019/06/21 18:11:12 by jormond-         ###   ########.fr       */
+/*   Updated: 2019/07/09 13:07:34 by jormond-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ static int  ft_is_valid2(char *buf)
 					sh++;
 				if (buf[i + 1] == '#')
 					sh++;
-				if (buf[i - 5] == '#' && (count - 5) > 0)
+				if (buf[i - 5] == '#' && (count - 5) >= 0)
 					sh++;
 				if (buf[i + 5] == '#' && (count + 5) < 21)
 					sh++;
 			}
-			// printf("%d", sh);
-			// printf("%c", buf[i]);
+			printf("%d", sh);
+			printf("%c", buf[i]);
 			count++;
 			i++;
 		}
-		// printf("iter\n");
+		printf("iter\n");
 		if (sh != 6 && sh != 8)
 			return (ERROR);
 	}
@@ -129,7 +129,7 @@ int          main(int ac, char **av)
 	int     fd;
 	int     len;
 	char    buf[MAX_VALID_BUF + 1];
-	char	**parc;
+	// char	**parc;
 
 	if (ac != 2)
 	{
@@ -143,12 +143,13 @@ int          main(int ac, char **av)
 		return (0);
 	}
 	buf[len] = '\0';
-	parc = ft_parce(buf);
-	// if (ERROR == ft_is_valid(buf))
-	// {
-	// 	write(1, "error\n", 6);
-	// 	return (0);
-	// }
+	// parc = ft_parce(buf);
+	if (ft_is_valid(buf) == ERROR)
+	{
+		write(1, "error\n", 6);
+		return (0);
+	}
+	ft_werewolf_letters(buf);
 	// ft_magic_sol(buf);
 	return (0);
 }
