@@ -6,41 +6,41 @@
 /*   By: jormond- <jormond-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:25:17 by jormond-          #+#    #+#             */
-/*   Updated: 2019/07/09 15:36:14 by jormond-         ###   ########.fr       */
+/*   Updated: 2019/07/12 17:55:13 by jormond-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "fillit.h"
 
-static char **ft_parce_arr(char *buf)
-{
-	int		i;
-	int		j;
-	int		k;
-	int		count;
-	char parce[25][21];
+// static char **ft_parce_arr(char *buf)
+// {
+// 	int		i;
+// 	int		j;
+// 	int		k;
+// 	int		count;
+// 	char parce[25][21];
 
-	i = 0;
-	j = 0;
-	k = 0;
-	while(buf[i])
-	{
-		count = 0;
-		while(count <= 20)
-		{
-			parce[j][k] = buf[i];
-			k++;
-			i++;
-			count++;
-			printf("%c", parce[j][k]);
-		}
-		parce[j][k] = '\0';
-		printf("%c\n\n", parce[j][k]);
-		j++;
-	}
-	return (parce);
-}
+// 	i = 0;
+// 	j = 0;
+// 	k = 0;
+// 	while(buf[i])
+// 	{
+// 		count = 0;
+// 		while(count <= 20)
+// 		{
+// 			parce[j][k] = buf[i];
+// 			k++;
+// 			i++;
+// 			count++;
+// 			printf("%c", parce[j][k]);
+// 		}
+// 		parce[j][k] = '\0';
+// 		printf("%c\n\n", parce[j][k]);
+// 		j++;
+// 	}
+// 	return (parce);
+// }
 
 static int  ft_is_valid2(char *buf)
 {
@@ -147,27 +147,22 @@ static char *ft_werewolf_letters(char *str)
 static void ft_magic_sol(char *buf)
 {
 	char *str;
-	char parce[25][21];
+	// char parce[25][21];
 
 	str = buf;
 	str = ft_werewolf_letters(str);
-	ft_parce_arr(buf);
+	// ft_parce_arr(buf);
 	// str = ft_shift(str);
 }
 
-int          main(int ac, char **av)
+
+int		fillit(char *av)
 {
 	int     fd;
 	int     len;
 	char    buf[MAX_VALID_BUF + 1];
-	// char	**parc;
-
-	if (ac != 2)
-	{
-		write(1, "error\n", 6);
-		return (0);
-	}
-	fd = open(av[1], O_RDONLY);
+	
+	fd = open(av, O_RDONLY);
 	if ((len = read(fd, buf, 546)) > MAX_VALID_BUF)
 	{
 		write(1, "error\n", 6);
@@ -183,3 +178,17 @@ int          main(int ac, char **av)
 	ft_magic_sol(buf);
 	return (0);
 }
+
+int          main(int ac, char **av)
+{
+	
+
+	if (ac != 2)
+	{
+		write(1, "error\n", 6);
+		return (0);
+	}
+	fillit(av[1]);
+	return (0);
+}
+
