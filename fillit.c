@@ -6,7 +6,7 @@
 /*   By: jormond- <jormond-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 13:50:21 by jormond-          #+#    #+#             */
-/*   Updated: 2019/07/17 15:10:41 by jormond-         ###   ########.fr       */
+/*   Updated: 2019/07/17 15:22:00 by jormond-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 
 static int	is_valid_ch(int c, int i)
 {
-	if (c == EMPTY || c == BLOCK || c == '\n' && (i % 5 == 4 || i == 20))
+	if (c == EMPTY || c == BLOCK || (c == '\n' && (i % 5 == 4 || i == 20)))
 		return (1);
 	return (0);
 }
 
-static int	ft_check_neighbour()
+static int	ft_check_neighbour(char *buf, int i)
 {
 	int count;
 
 	if (i > 15)
 		return (0);
-	res = 0;
+	count = 0;
 	while(buf[i])
 	{
 		if (buf[i] == BLOCK)

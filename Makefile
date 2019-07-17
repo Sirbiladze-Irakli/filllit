@@ -6,7 +6,7 @@
 #    By: jormond- <jormond-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/17 12:43:39 by jormond-          #+#    #+#              #
-#    Updated: 2019/07/17 14:29:55 by jormond-         ###   ########.fr        #
+#    Updated: 2019/07/17 15:20:34 by jormond-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,8 @@ $(NAME): $(LIB) $(OBJ)
 $(LIB):
 	make -C ./libft re	
 
-$(OBJ):
-	$(CC) $(CFLAGS) -c $< $(INC) -o $@ 
+$(OBJ): %.o: %.c
+	$(CC) $(CFLAGS) -c $< -I $(INC) -o $@ 
 
 clean:
 	rm -f $(OBJ)
