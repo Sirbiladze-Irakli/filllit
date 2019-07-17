@@ -6,7 +6,7 @@
 /*   By: jormond- <jormond-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 15:29:17 by jormond-          #+#    #+#             */
-/*   Updated: 2019/07/09 12:19:00 by jormond-         ###   ########.fr       */
+/*   Updated: 2019/07/17 14:45:08 by jormond-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,34 @@
 # include <fcntl.h>
 # include "libft/libft.h"
 
-# define MAX_VALID_BUF 545
-# define ERROR -1
+# define EMPTY '.'
+# define BLOCK '#'
+# define ERROR1 "usage: ./fillit [file_name]\n"
+# define ERROR2 "error\n"
 # define OK 0
 
-typedef struct  s_square
+typedef struct      s_piece
 {
-    int         size;
-    char        **map;
-}               t_square;
+    int             x;
+    int             y;
+    int             width;
+    int             height;
+    char            piece[21];
+    char            letter;
+    struct s_piece  *next;
+
+}                   t_piece;
+
+
+typedef struct      s_etris
+{
+    t_piece         *pieces;
+    int             nb_of_pieces;
+    int             size;
+    char            **map;
+}                   t_etris;
+
+int		fillit(char *av);
+void		ft_errors(char *s);
 
 #endif
